@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "content": "고양이 밥 주기 🦁",
+      "isComplete": false
+    },
+    {
+      "id": 2,
+      "content": "호랑이 물 주기 🪴",
+      "isComplete": false
+    },
+    {
+      "id": 3,
+      "content": "아침으로 시리얼 먹기 🍙",
+      "isComplete": true
+    },
+    {
+      "id": 4,
+      "content": "점심으로 햄버거 먹기 🍔",
+      "isComplete": true
+    }
+  ]
+}
