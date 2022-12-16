@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import CreateTodo from './components/CreateTodo';
+import Header from './components/Header';
+import Todos from './components/Todos';
 
-function App() {
+const App = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const showAddNewTodoHandler = (value) => {
+    setIsVisible(value);
+  };
+
+  const saveTodoDataHandler = (newTodoData) => {
+    fetch(`http://localhost:3001/todos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTodoData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('성공: ', data);
+      })
+      .catch((error) => {
+        console.error('실패: ', error);
+      });
+    console.log('created!');
+    window.location.reload();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header onShowAddNewTodo={showAddNewTodoHandler} isVisible={isVisible} />
+      <CreateTodo onSaveTodoData={saveTodoDataHandler} isVisible={isVisible} />
+      <Todos />
     </div>
   );
-}
+};
 
 export default App;
